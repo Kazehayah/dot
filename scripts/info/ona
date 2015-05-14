@@ -1,0 +1,87 @@
+#!/bin/sh
+
+c00=$'\e[0;30m'
+c01=$'\e[0;31m'
+c02=$'\e[0;32m'
+c03=$'\e[0;33m'
+c04=$'\e[0;34m'
+c05=$'\e[0;35m'
+c06=$'\e[0;36m'
+c07=$'\e[0;37m' c08=$'\e[1;30m'
+c09=$'\e[1;31m'
+c10=$'\e[1;32m'
+c11=$'\e[1;33m'
+c12=$'\e[1;34m'
+c13=$'\e[1;35m'
+c14=$'\e[1;36m'
+c15=$'\e[1;37m'
+
+f0=$'\e[1;30m'
+f1=$'\e[1;37m'
+f2=$'\e[0;37m'
+
+  bkf=$'\e[30m';   rf=$'\e[31m';    gf=$'\e[32m' 
+  yf=$'\e[33m'   bf=$'\e[34m';   mf=$'\e[35m' 
+  cf=$'\e[36m';    wf=$'\e[37m' 
+   
+  bkb=$'\e[40m';   rb=$'\e[41m';    gb=$'\e[42m' 
+  yb=$'\e[43m'   bb=$'\e[44m';   mb=$'\e[45m' 
+  cb=$'\e[46m';    wb=$'\e[47m'; rst=$'\e[0m' 
+   
+  ibkf=$'\e[90m';   irf=$'\e[91m';    igf=$'\e[92m' 
+  iyf=$'\e[93m'   ibf=$'\e[94m';   imf=$'\e[95m' 
+  icf=$'\e[96m';    iwf=$'\e[97m' 
+ 
+  ibkb=$'\e[100m';   irb=$'\e[101m';    igb=$'\e[102m' 
+  iyb=$'\e[103m'   ibb=$'\e[104m';   imb=$'\e[105m'
+  icb=$'\e[106m';    iwb=$'\e[107m';
+# over all length of mushrooms = 64
+
+# width of terminal
+width=$(tput cols)
+
+for ((v=0; v < ($width-64)/3; v++))
+do
+spaces="$spaces "
+done
+
+kernel=$(uname -rmo)
+#cpuspe=$(grep 'model name' /proc/cpuinfo| sed 1q|sed 's/^.*:\ *//')
+cpuspe=$(sed -n '/model\ name/s/^.*:\ //p' /proc/cpuinfo | uniq)
+memspe=$(free -m | grep Mem: | cut -d' ' -f11)
+
+#system=$(lsb_release -d | sed 's/^.*:\s*//')
+system=$(cat /etc/issue|cut -d\\ -f1)
+
+if [ -n "$DISPLAY" ]; then
+    wmname=$(herbstluftwm -v | head -1)
+    termfn=$(more ~/.Xdefaults | grep font | cut -d: -f3)
+else
+    wmname="none"
+    termfn="none"
+    systfn="none"
+fi
+
+pkgnum=$(pacman -Q|wc -l)
+birthd=$(sed -n '1s/^\[\([0-9-]*\).*$/\1/p' /var/log/pacman.log | tr - .)
+MPC=`mpc -f %title%  | head -1`
+MPD=`mpc -f %artist%  | head -1`
+gitdir=github.com/copycat-killer
+myblog=blog.z3bra.org
+
+cat << EOF
+
+
+
+${ibkf}   ▄▄█${rb}▀${wb}▀▀${rb}▀█${rst}${ibkf}▄${rst}	${c00}   ${c05}OS ${f0}........... $f2$system
+${ibkf} ▄█${wb}▀${rf}██▀${wf}██${rf}${wb}▀██${ibkf}▀█${rst}	${c08}   ${c04}Name ${f0}......... $f2$HOSTNAME
+${ibkf}▄█${rf}█${wb}▄${wf}██${rb}▀▀▀▀██▀${rf}█${rst}${ibkf}█▄${rst} ${c014}  ${c014}Kernel ${f0}....... $f2$kernel
+${ibkf}█${rf}███${wf}█${rf}██████${wf}█${rf}███${ibkf}█${rst}${c09}   ${c06}Packages ${f0}..... $f2$pkgnum
+${ibkf}█${wf}${rb}▄▄██▄${rf}████${wf}${rb}▄██▄▄${ibkf}█${rst}${c06}   ${c09}Processor ${f0}.... $f2$cpuspe
+${ibkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${c10}   ${c13}Wm ${f0}........... $f2$wmname
+${ibkf} ▀█${wf}███${ibkb}▄██▄███${rst}${ibkf}█▀${rst}	${c03}   ${c14}Shell ${f0}........ $f2$SHELL
+${ibkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}	${c11}   ${c12}Terminal ${f0}..... $f2$TERM
+		${c013}   ${c09}GTK ${f0}.......... $f2$(more ~/.gtkrc-2.0 | grep gtk-theme-name | cut -d'"' -f2)
+		${c06}   ${c02}Icons ${f0}........ $f2$(more ~/.gtkrc-2.0 | grep gtk-icon-theme | cut -d"=" -f2 | cut -d'"' -f2)
+		${c12}   ${c011}Now Playing ${f0}.. $f2$MPC - $f2$MPD
+EOF
