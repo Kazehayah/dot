@@ -1,17 +1,19 @@
 ..RW..
 =============
 
-**Need**
-+ Dzen2		+ Obmenu-generator
+##Need :
++ Dzen2	
 + Dmenu2
 + Conky
 + Urxvt
 + Nitrogen
 + Compton 
++ Obmenu-generator
++ sxhkd
 
 ### My Screens
 **Bspwm** : Stay_left-right
 ![Stay_left-right Shot] (https://raw.githubusercontent.com/Kazehayah/dot/master/Shot/Stay_left-right.png)
 
 **Openbox** : Joss_gandos
-![Joss_gandos Shot] 
+![Joss_gandos Shot] (https://raw.githubusercontent.com/Kazehayah/dot/master/Shot/Joss_gandos.png)
