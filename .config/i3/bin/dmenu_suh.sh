@@ -12,53 +12,46 @@
 # How many spaces do you want before the battery status ?
 #spaces=50
 
-# Automating the number of spaces
-#function auto_space
-#
-#for ((i = 0; i <= $spaces; i++)); do
-#  printf ' '
-#done
-#}
-
 # Define your preferred terminal
 terminal='urxvt -e'
+ 
 
 # Menu Order.
-menu_list="File\\nWall\nWeb\nTerm\nGimp\nMusic\nHtop\nRanger\nShot\nLogout\nShutdown\nReboot"
-menu_list2="Logout\nReboot\nShutdown"
+menu_list="»» File\\n»» Wall\n»» Web\n»» Gimp\n»» Music\n»» Shot\n------------\n»» Logout\n»» Reboot\n»» Shutdown"
 
 # Dmenu Preferences
-Dmenu="dmenu -p '»»»»' -i -b -h 24 -l 12 -w 200 -dim 0.1 -x 50 -y 400 -fn 'ohsnap' -i -nb '#101010' -sb '#E06179' -nf '#FFFFFF' -sf '#FFFFFF'"
+Dmenu="dmenu -p '' -i -b -h 24 -l 12 -w 100 -dim 0.0 -x 720 -y 320 -i -fn 'ohsnap','lemon'  -nb '#212121' -sb '#36887B' -nf '#E5CBCB' -sf '#FFFFFF'"
 
 asuh=$(echo -e "$menu_list" | eval $Dmenu)
 
 
 
 case $asuh in
-  File)
+  *File)
     thunar ;;
-  Wall)
+  *Wall)
     nitrogen ;;
-  Web)
+  *Web)
     firefox ;;
-  Ranger)
+  *Ranger)
     $terminal ranger ;;
-  Htop)
+  *Htop)
     $terminal htop ;;
-  Term)
+  *Term)
     urxvt ;;
-  Gimp)
+  *Gimp)
     gimp ;;
-  Music)
+  *Music)
     $terminal ncmpcpp ;; 
-  Shot)
+  *Shot)
 	scrot 'asuh.png' -e 'mv $f ~/Pictures/' && notify-send 'Scrot Saved !' ;;
-   Logout) 
-    pkill xmonad & ;;
-  Shutdown)
-   shutdown -h now & ;;
-  Reboot)
+   *Logout | ";"i | i";") 
+    pkill i3 & ;;
+   *Reboot)
    shutdown -r now & ;;
+  *Shutdown)
+   shutdown -h now & ;;
+
   
     
 esac

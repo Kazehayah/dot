@@ -25,6 +25,8 @@ initializeANSI()
 initializeANSI
 
 cat << EOF 
+
+
   
 ${boldon}${redf}        ■      ${boldon}${greenf}        ■      ${boldon}${yellowf}        ■     ${boldon}${bluef}         ■       ${boldon}${purplef}       ■      ${boldon}${cyanf}        ■   ${reset}
 ${boldon}${redf}       ■■■     ${boldon}${greenf}       ■■■     ${boldon}${yellowf}       ■■■    ${boldon}${bluef}        ■■■      ${boldon}${purplef}      ■■■     ${boldon}${cyanf}       ■■■  ${reset}

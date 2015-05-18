@@ -17,3 +17,6 @@
 
 **Openbox** : Joss_gandos
 ![Joss_gandos Shot] (https://raw.githubusercontent.com/Kazehayah/dot/master/Shot/Joss_gandos.png)
+
+**i3** : Wussh
+![Wussh Shot] (https://raw.githubusercontent.com/Kazehayah/dot/master/Shot/Wussh.png)
