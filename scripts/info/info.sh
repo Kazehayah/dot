@@ -56,7 +56,7 @@ wm=$(wmctrl -m | grep -i name | awk '{print $2}')
 # Other
 pkgnum=$(pacman -Q|wc -l)
 cpuspe=$(grep 'model name' /proc/cpuinfo| sed 1q|sed 's/^.*:\ *//')
-termfn=$(cat $HOME/.Xresources | grep -v ! | awk '/*font/ {print $2}' | sed 's/xft://;s/:pixelsize//;s/=/\ /')
+termfn=$(cat $HOME/.Xdefaults | grep -v ! | awk '/*font/ {print $2}' | sed 's/xft://;s/:pixelsize//;s/=/\ /')
 UPT=`uptime | awk -F'( |,)' '{print $2}' | awk -F ":" '{print $1}'`
 uptime=$(uptime | sed 's/.*up \([^,]*\), .*/\1/')
 uptime2=$(uptime | sed -nr 's/.*\s+([[:digit:]]{1,2}):[[:digit:]]{2},.*/\1/p')
@@ -118,7 +118,7 @@ $f7		$f6 VGA 	   » $f4 $vga
 $f7		$f6 Uptime    » $f4$uptime
 $f7		$f6 Term 	   » $f4 $TERM
 $f7		$f6 Package   » $f4 $pkgnum
-$f7	  	$f6 Font      »  $f4$TermFont
+$f7	  	$f6 Font      »  $f4$termfn
 $f7	  	$f7     $f7|$f4$cpu$f7|   	         
 EOF
 
